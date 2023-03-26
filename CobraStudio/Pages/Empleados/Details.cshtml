@@ -1,0 +1,78 @@
+﻿@page
+@model CobraStudio.Pages.Empleados.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4>Ver Empleado</h4>
+   
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Id
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.IdEmpleado)
+        </dd>
+        <dt class="col-sm-2">
+            Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.NombreCompleto)
+        </dd>
+        <dt class="col-sm-2">
+            Cedula
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.Cedula)
+        </dd>
+        <dt class="col-sm-2">
+            Correo
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.Correo)
+        </dd>
+        <dt class="col-sm-2">
+            Fecha de Nacimiento
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.FechaNacimiento)
+        </dd>
+        <dt class="col-sm-2">
+            Edad
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Edad)
+        </dd>
+        <dt class="col-sm-2">
+            Fecha de Ingreso
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.FechaIngreso)
+        </dd>
+        <dt class="col-sm-2">
+            Tiempo de trabajo
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tiempo)
+        </dd>
+        <dt class="col-sm-2">
+            Jefe
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jefe)
+        </dd>
+        <dt class="col-sm-2">
+            Foto
+        </dt>
+        <dd class="col-sm-10">
+            <img style="width:150px" src="data:image/png;base64,@Model.Base" />
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Empleado.IdEmpleado">Editar</a> |
+    <a asp-page="./Index">Volver</a>
+</div>

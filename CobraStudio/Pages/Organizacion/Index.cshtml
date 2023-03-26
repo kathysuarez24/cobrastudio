@@ -1,0 +1,60 @@
+﻿@page
+@model CobraStudio.Pages.Organizacion.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>Organización</h4>
+<hr />
+<div>
+    <ul>
+        @foreach (var jefe in @Model.OtraLista)
+        {
+            <li class="jefe">@jefe.NombreCompleto</li>
+            if (jefe.InverseIdJefeNavigation != null && jefe.InverseIdJefeNavigation.Any())
+            {
+                <ul>
+                    @foreach (var empleado in jefe.InverseIdJefeNavigation)
+                    {
+                        <li class="empleado">@empleado.NombreCompleto</li>
+                        if (empleado.InverseIdJefeNavigation != null & empleado.InverseIdJefeNavigation.Any())
+                        {
+                            <ul>
+                                @foreach (var item in empleado.InverseIdJefeNavigation)
+                            {
+                                <li class="subordinado">@item.NombreCompleto</li>
+                            }
+                            </ul>
+                        }
+                    }
+                </ul>
+            }
+        }
+    </ul>
+</div>
+
+<style>
+    ul {
+        //list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        margin: 0;
+        padding: 0;
+    }
+
+    .jefe {
+        font-weight: bold;
+    }
+
+    .empleado {
+        margin-left: 30px;
+    }
+
+    .subordinado {
+        margin-left: 60px;
+    }
+</style>

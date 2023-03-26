@@ -1,0 +1,31 @@
+﻿@page
+@model CobraStudio.Pages.EmpleadoHabilidades.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>EmpleadoHabilidad</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpleadoHabilidad.IdEmpleado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpleadoHabilidad.IdEmpleado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpleadoHabilidad.NombreHabilidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpleadoHabilidad.NombreHabilidad)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.EmpleadoHabilidad.IdHabilidad">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

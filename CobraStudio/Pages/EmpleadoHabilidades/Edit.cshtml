@@ -1,0 +1,54 @@
+﻿@page
+@model CobraStudio.Pages.EmpleadoHabilidades.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Agregar Habilidad</h4>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="EmpleadoHabilidad.IdEmpleado" value="@Model.Empleado.IdEmpleado" type="hidden"/>
+            <div class="form-group">
+                <label asp-for="EmpleadoHabilidad.NombreHabilidad" class="control-label">Nombre de Habilidad</label>
+                <select id="habilidades" class="form-control" onchange="ShowSelectedHabilidad();">
+                    <option selected disabled>--Seleccione una habilidad--</option>
+                    <option value="Javascript">Javascript</option>
+                    <option value="Java">Java</option>
+                    <option value=".Net">.Net</option>
+                    <option value="SqlServer">SqlServer</option>
+                    <option value="C#">C#</option>
+                    <option value="Css">Css</option>
+                    <option value="Html">Html</option>
+                    <option value="Angular">Angular</option>
+                    <option value="Vue">Vue</option>
+                </select>
+                <input asp-for="EmpleadoHabilidad.NombreHabilidad" class="form-control" id="habil" type="hidden"/>
+                <span asp-validation-for="EmpleadoHabilidad.NombreHabilidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Volver</a>
+</div>
+
+<script>
+    function ShowSelectedHabilidad() {
+        var cod = document.getElementById("habilidades").value;
+        document.getElementById("habil").value = cod;
+        console.log(cod);
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

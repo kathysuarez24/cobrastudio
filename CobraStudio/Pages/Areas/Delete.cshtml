@@ -1,0 +1,32 @@
+﻿@page
+@model CobraStudio.Pages.Areas.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h4>Eliminar Área</h4>
+<h6>¿Está seguro que desea eliminar esta área?</h6>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Area.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            Descripción
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Area.Descripcion)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Area.IdArea" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Volver</a>
+    </form>
+</div>

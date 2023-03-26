@@ -1,0 +1,42 @@
+﻿@page
+@model CobraStudio.Pages.EmpleadoHabilidades.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>Habilidades</h4>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Habilidades</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.EmpleadoHabilidadGroup)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEmpleado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreEmpleado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Otro)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.IdEmpleado">Agregar</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>

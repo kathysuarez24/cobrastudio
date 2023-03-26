@@ -1,0 +1,63 @@
+﻿@page
+@model CobraStudio.Pages.Empleados.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h4>Eliminar Empleado</h4>
+<h6>¿Está seguro de eliminar este empleado?</h6>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre Completo
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.NombreCompleto)
+        </dd>
+        <dt class="col-sm-2">
+            Cedula
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.Cedula)
+        </dd>
+        <dt class="col-sm-2">
+            Correo
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.Correo)
+        </dd>
+        <dt class="col-sm-2">
+            Fecha de Nacimiento
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.FechaNacimiento)
+        </dd>
+        <dt class="col-sm-2">
+            Fecha de Ingreso
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.FechaIngreso)
+        </dd>
+        <dt class="col-sm-2">
+            Id Jefe
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.IdJefe)
+        </dd>
+        <dt class="col-sm-2">
+           Id Área
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Empleado.IdArea)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Empleado.IdEmpleado" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Volver</a>
+    </form>
+</div>

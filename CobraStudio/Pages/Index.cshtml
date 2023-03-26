@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h5 class="display-4"><strong>¡Bienvenidos!</strong></h5>
+</div>
+<hr />
+
+<div class="text-center">
+    <h5>Opciones del menú</h5>
+    <br />
+</div>
+
+
+<div class="row mb-auto">
+    <div class="col-md-3">
+        <div class="row no-gutters border mb-4 medium">
+            <div class="col p-4 mb-4 ">
+                <h6 >Áreas</h6>
+                <p class="card-text">
+                    Puedes agregar, visualizar, editar o eliminar áreas de la organización.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row no-gutters border mb-4 medium">
+            <div class="col p-4 d-flex flex-column position-static">
+                <h6>Empleados</h6>
+                <p class="card-text mb-auto">
+                    Puedes agregar, visualizar, editar o eliminar empleados. Además podrás filtrar dichos empleados por áreas.
+                </p>
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row no-gutters border mb-4 medium">
+            <div class="col p-4 d-flex flex-column">
+                <h6>Habilidades</h6>
+                <p class="card-text mb-auto">
+                    Puedes ver un listado de los empleados con sus respectivas habilidades.
+                    Además podrás agregar habilidades al empleado que desees.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="row no-gutters border mb-4 medium">
+            <div class="col p-4 d-flex flex-column">
+                <h6>Organización</h6>
+                <p class="card-text mb-auto">
+                    Puedes visualizar la jerarquía de los empleados de la organización. Podrás ver reflejado los superiores y subordinados de cada empleado.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .medium {
+        height:220px;
+    }
+</style>

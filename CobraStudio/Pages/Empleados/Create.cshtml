@@ -1,0 +1,206 @@
+﻿@page
+@model CobraStudio.Pages.Empleados.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Registrar Empleado</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Empleado.NombreCompleto" class="control-label">Nombre Completo</label>
+                <input asp-for="Empleado.NombreCompleto" class="form-control" />
+                <span asp-validation-for="Empleado.NombreCompleto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.Cedula" class="control-label">Cedula</label>
+                <input asp-for="Empleado.Cedula" class="form-control" />
+                <span asp-validation-for="Empleado.Cedula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.Correo" class="control-label">Correo</label>
+                <input asp-for="Empleado.Correo" class="form-control" />
+                <span asp-validation-for="Empleado.Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
+                <input asp-for="Empleado.FechaNacimiento" class="form-control" />
+                <span asp-validation-for="Empleado.FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.FechaIngreso" class="control-label">Fecha de Ingreso</label>
+                <input asp-for="Empleado.FechaIngreso" class="form-control" />
+                <span asp-validation-for="Empleado.FechaIngreso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.IdJefe" class="control-label">Jefe</label>
+                <select id="empleados" class="form-control" onchange="ShowSelectedJefe();">
+                    <option selected disabled>--Seleccione su jefe--</option>
+                    @if (Model.items != null)
+                    {
+                        @foreach (var item in Model.jefes)
+                        {
+                            <option value=@item.Value> @item.Text</option>
+                        }
+                    }
+                </select>
+                <input asp-for="Empleado.IdJefe" id="jefe" type="hidden" class="form-control" />
+                <span asp-validation-for="Empleado.IdJefe" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Empleado.IdArea" class="control-label">Área</label>
+                <select id="kathe" class="form-control" name="SearchString" onchange="ShowSelected();">
+                    <option selected disabled>--Selecciones el área--</option>
+                    @if (Model.items != null)
+                    {
+                        @foreach (var item in Model.items)
+                        {
+                            <option value=@item.Value> @item.Text</option>
+                        }
+                    }
+                </select>
+                <input asp-for="Empleado.IdArea" id="area" type="hidden" class="form-control" />
+                <span asp-validation-for="Empleado.IdArea" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Empleado.Foto" class="control-label">Foto</label>
+                <input type="file" id="fileId" onchange="Uploaded(), previewImage(event, '#imgPreview')">
+                <input type="hidden" id="base64" asp-for="Empleado.Foto" class="form-control" />
+                <br />
+                <br />
+                <img id="imgPreview" style="width:150px">
+                <span asp-validation-for="Empleado.Foto" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script type="text/javascript">
+    var base64String = "";
+    var binary;
+
+    function ShowSelected() {
+        var cod = document.getElementById("kathe").value;
+        document.getElementById("area").value = cod;
+        console.log(cod);
+    }
+
+    function ShowSelectedJefe() {
+        var jef = document.getElementById("empleados").value;
+        document.getElementById("jefe").value = jef;
+        console.log(jef);
+    }
+
+    function Uploaded() {
+        var file = document.querySelector('input[type=file]')['files'][0];
+        var reader = new FileReader();
+        reader.onload = function () {
+            base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+            imageBase64Stringsep = base64String;
+        }
+        reader.readAsDataURL(file);
+        setTimeout(display, 1000);
+    }
+
+    function display() {
+        console.log(base64String);
+        document.getElementById("base64").value = base64String;
+        document.getElementById("base64a").value = base64String;
+    }
+
+    function previewImage(event, querySelector) {
+
+        //Recuperamos el input que desencadeno la acción
+        const input = event.target;
+
+        //Recuperamos la etiqueta img donde cargaremos la imagen
+        $imgPreview = document.querySelector(querySelector);
+
+        // Verificamos si existe una imagen seleccionada
+        if (!input.files.length) return
+
+        //Recuperamos el archivo subido
+        file = input.files[0];
+
+        //Creamos la url
+        objectURL = URL.createObjectURL(file);
+
+        //Modificamos el atributo src de la etiqueta img
+        $imgPreview.src = objectURL;
+
+    }
+
+    /*function _base64ToArrayBuffer() {
+       var binary_string = window.atob(base64String);
+       var len = binary_string.length;
+       var bytes = new Uint8Array(len);
+       for (var i = 0; i < len; i++) {
+           bytes[i] = binary_string.charCodeAt(i);
+       }
+       return bytes.buffer;
+   }*/
+
+
+    
+    /*function convertToByteArray()
+    {
+        var fileInput = document.getElementById('fileInput');
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function ()
+        {
+           var byteArray = new Uint8Array(reader.result);
+            // Envía el arreglo de bytes a la base de datos
+            console.log(byteArray);
+            document.getElementById("base64").value = byteArray;
+        }
+        reader.readAsArrayBuffer(file);
+        
+    }*/
+    /*
+    var loadFile = function (event) {
+        var img = document.getElementById('myImg');
+        img.src = URL.createObjectURL(event.target.files[0]);
+        img.onload = function () {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            var dataURL = canvas.toDataURL('image/jpeg');
+            var binaryData = atob(dataURL.split(',')[1]);
+            var arrayData = [];
+            for (var i = 0; i < binaryData.length; i++) {
+                arrayData.push(binaryData.charCodeAt(i));
+            }
+            var blob = new Blob([new Uint8Array(arrayData)], { type: 'image/jpeg' });
+            document.getElementById("base64").value = blob;
+            console.log(blob);
+        };
+    };*/
+    
+
+
+
+
+</script>

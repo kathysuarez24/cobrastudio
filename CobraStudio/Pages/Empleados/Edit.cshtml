@@ -1,0 +1,104 @@
+﻿@page
+@model CobraStudio.Pages.Empleados.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Editar Empleado</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Empleado.IdEmpleado" />
+            <div class="form-group">
+                <label asp-for="Empleado.NombreCompleto" class="control-label">Nombre Completo</label>
+                <input asp-for="Empleado.NombreCompleto" class="form-control" />
+                <span asp-validation-for="Empleado.NombreCompleto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.Cedula" class="control-label">Cedula</label>
+                <input asp-for="Empleado.Cedula" class="form-control" />
+                <span asp-validation-for="Empleado.Cedula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.Correo" class="control-label">Correo</label>
+                <input asp-for="Empleado.Correo" class="form-control" />
+                <span asp-validation-for="Empleado.Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.FechaNacimiento" class="control-label">Fecha de Nacimiento</label>
+                <input asp-for="Empleado.FechaNacimiento" class="form-control" />
+                <span asp-validation-for="Empleado.FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.FechaIngreso" class="control-label">Fecha de Ingreso</label>
+                <input asp-for="Empleado.FechaIngreso" class="form-control" />
+                <span asp-validation-for="Empleado.FechaIngreso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empleado.IdJefe" class="control-label">Jefe</label>
+                <select id="empleados" class="form-control" onchange="ShowSelectedJefe();">
+                    <option disabled>--Seleccione su jefe--</option>
+                    @if (Model.items != null)
+                    {
+                        @foreach (var item in Model.jefes)
+                        {
+                            <option value=@item.Value> @item.Text</option>
+                        }
+                    }
+                </select>
+                <input asp-for="Empleado.IdJefe" id="jefe" type="hidden" class="form-control" />
+                <span asp-validation-for="Empleado.IdJefe" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Empleado.IdArea" class="control-label">Área</label>
+                <select id="kathe" class="form-control" onchange="ShowSelected();">
+                    <option disabled>--Seleccione el área--</option>
+                    @if (Model.items != null)
+                    {
+                        @foreach (var item in Model.items)
+                        {
+                            <option value=@item.Value> @item.Text</option>
+                        }
+                    }
+                </select>
+                <input asp-for="Empleado.IdArea" id="area" type="hidden" class="form-control" />
+                <span asp-validation-for="Empleado.IdArea" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" style="display:none">
+                <label asp-for="Empleado.Foto" class="control-label">Foto</label>
+                <input asp-for="Empleado.Foto" class="form-control" value="@Model.FotoVieja"/>
+                <span asp-validation-for="Empleado.Foto" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Volver</a>
+</div>
+<script>
+    function ShowSelected() {
+        var cod = document.getElementById("kathe").value;
+        document.getElementById("area").value = cod;
+        console.log(cod);
+    }
+
+    function ShowSelectedJefe() {
+        var jef = document.getElementById("empleados").value;
+        document.getElementById("jefe").value = jef;
+        console.log(jef);
+    }
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
